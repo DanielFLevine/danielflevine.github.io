@@ -9,17 +9,23 @@
             background-color: #f5f5dc; /* Light beige background */
             font-family: Arial, sans-serif; /* Sets a readable, sans-serif font */
             padding: 20px; /* Adds spacing around the content */
+            display: flex;
+            justify-content: center; /* Centers the content horizontally */
+        }
+        .container {
+            max-width: 800px; /* Limits the width of the page content */
         }
         hr {
-            border: 0; 
-            height: 2px; 
+            border: 0;
+            height: 2px;
             background-color: #000; /* Black line for separation */
         }
         .contact-info {
             margin: 20px 0; /* Adds vertical spacing around the contact info section */
         }
         .contact-info a {
-            margin-right: 20px; /* Spacing between contact links */
+            display: block; /* Makes each link take a full line */
+            margin-bottom: 10px; /* Adds space between the links */
             color: #000; /* Black color for links */
             text-decoration: none; /* Removes underline from links */
         }
@@ -29,22 +35,24 @@
     </style>
 </head>
 <body>
-    <h1>Daniel Levine</h1>
-    <hr>
-    <div class="contact-info">
-        <a href="">CV</a>
-        <a href="mailto:daniel.levine@yale.edu">daniel.levine@yale.edu</a>
-        <a href="https://www.linkedin.com/in/danielflevine">LinkedIn</a>
-        <a href="https://scholar.google.com/citations?user=2G-O1zQAAAAJ">Google Scholar</a>
-        <a href="https://github.com/DanielFLevine">GitHub</a>
+    <div class="container">
+        <h1>Daniel Levine</h1>
+        <hr>
+        <div class="contact-info">
+            <a href="">CV</a>
+            <a href="mailto:daniel.levine@yale.edu">daniel.levine@yale.edu</a>
+            <a href="https://www.linkedin.com/in/danielflevine">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=2G-O1zQAAAAJ">Google Scholar</a>
+            <a href="https://github.com/DanielFLevine">GitHub</a>
+        </div>
+        <p>
+            I am currently a postdoctoral associate at the <a href="https://www.vandijklab.org/">van Dijk Lab</a> at Yale University.
+            I completed my PhD in math in 2020 under the supervision of Jack Huizenga with a dissertation on moduli spaces of semistable sheaves.
+            My current research interests are broad but include 
+            large language models and their applications to biomedical data, 
+            applications of topology to machine learning, and relational inference.
+        </p>
+        <h2>Publications</h2>
     </div>
-    <p>
-        I am currently a postdoctoral associate at the <a href="https://www.vandijklab.org/">van Dijk Lab</a> at Yale University.
-        I completed my PhD in math in 2020 under the supervision of Jack Huizenga with a dissertation on moduli spaces of semistable sheaves.
-        My current research interests are broad but include 
-        large language models and their applications to biomedical data, 
-        applications of topology to machine learning, and relational inference.
-    </p>
-    <h2>Publications</h2>
 </body>
 </html>
