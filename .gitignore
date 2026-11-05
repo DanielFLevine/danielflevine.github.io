@@ -1,0 +1,2 @@
+# Keep the LaTeX CV source local; publish the PDF instead.
+/cv.tex

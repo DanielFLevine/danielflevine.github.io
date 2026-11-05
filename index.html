@@ -1,60 +1,225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Levine</title>
-    <style>
-        body {
-            background-color: #f5f5dc; /* Light beige background */
-            font-family: Arial, sans-serif; /* Sets a readable, sans-serif font */
-            padding: 20px; /* Adds spacing around the content */
-            display: flex;
-            justify-content: center; /* Centers the content horizontally */
-        }
-        .container {
-            max-width: 800px; /* Limits the width of the page content */
-        }
-        hr {
-            border: 0;
-            height: 2px;
-            background-color: #000; /* Black line for separation */
-        }
-        h1 {
-        text-align: center; /* Centers the title */
-        }
-        .contact-info {
-            margin: 20px 0; /* Adds vertical spacing around the contact info section */
-        }
-        .contact-info a {
-            display: block; /* Makes each link take a full line */
-            margin-bottom: 10px; /* Adds space between the links */
-            color: #000; /* Black color for links */
-        }
-        .contact-info a:hover {
-            text-decoration: underline; /* Underlines links on hover for better accessibility */
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Daniel Levine's personal webpage. Research and publications from a Yale–Boehringer Ingelheim Biomedical Data Science Postdoctoral Fellow.">
+  <meta name="theme-color" content="#faf9f6">
+  <title>Daniel Levine's Personal Webpage</title>
+  <style>
+    /* Embedded styles keep the page independent of build tools and external assets. */
+    :root {
+      color-scheme: light;
+      --paper: #faf9f6;
+      --ink: #252b32;
+      --muted: #58616c;
+      --accent: #164b75;
+      --rule: #d9dddf;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 2rem; }
+    body {
+      margin: 0;
+      border-top: 5px solid var(--accent);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-text-size-adjust: 100%;
+      overflow-wrap: anywhere;
+    }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+    a:hover { text-decoration-thickness: 2px; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    .page { max-width: 960px; margin-inline: auto; padding: 0 2.5rem; }
+    .skip-link { position: absolute; top: -5rem; left: 1rem; padding: 0.7rem 1rem; background: white; z-index: 1; }
+    .skip-link:focus { top: 1rem; }
+
+    /* Profile */
+    .profile { padding-top: 4rem; border-bottom: 1px solid var(--rule); }
+    .profile-heading { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; align-items: start; margin-bottom: 2rem; }
+    .profile-media { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; width: 220px; max-width: 100%; }
+    /* A 9:10 frame crops 5% from each side of the square original. */
+    .profile-photo { display: block; width: 180px; height: 200px; max-width: 100%; object-fit: cover; object-position: center; border-radius: 6px; }
+    .eyebrow { margin: 0 0 0.6rem; color: var(--muted); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { font-family: var(--serif); font-weight: 400; }
+    h1 { margin-bottom: 0.8rem; font-size: clamp(2.6rem, 7vw, 3.8rem); line-height: 1.1; letter-spacing: -0.04em; }
+    .position { max-width: 42rem; margin-bottom: 0.35rem; font-size: 1.125rem; line-height: 1.5; }
+    .affiliation { margin-bottom: 1rem; color: var(--muted); }
+    .profile-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0; width: 100%; margin: 0; }
+    .profile-links a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border-radius: 4px; }
+    .profile-links a:hover { background: #edf2f6; }
+    .profile-links svg { display: block; width: 22px; height: 22px; flex: none; }
+    .intro { max-width: 47rem; margin-bottom: 0; }
+    .profile-copy p, .publications p, .publication-title {
+      text-align: justify;
+      text-align-last: left;
+    }
+
+    /* Publications */
+    section { padding-top: 2.8rem; }
+    h2 { margin-bottom: 1.4rem; font-size: 1.8rem; line-height: 1.25; letter-spacing: -0.025em; }
+    h3 { margin-bottom: 0.25rem; font-size: 1rem; font-weight: 600; line-height: 1.5; }
+    .section-note { margin-top: -0.75rem; margin-bottom: 1.6rem; color: var(--muted); font-size: 0.875rem; }
+    .authors, .venue { color: var(--muted); }
+    .publications { margin: 0; padding-left: 1.8rem; }
+    .publications > li { padding-left: 0.45rem; margin-bottom: 1.8rem; }
+    .publications > li:last-child { margin-bottom: 0; }
+    .publications > li::marker { color: var(--muted); font-size: 0.875rem; }
+    .publication-title { margin-bottom: 0.4rem; font-size: 1.05rem; line-height: 1.5; }
+    .publication-title a { text-decoration: none; }
+    .publication-title a:hover { text-decoration: underline; }
+    .authors { margin-bottom: 0.4rem; font-size: 0.9rem; line-height: 1.65; }
+    .authors strong { color: var(--ink); font-weight: 600; }
+    .venue { margin-bottom: 0; font-size: 0.875rem; }
+    .venue em { color: var(--ink); }
+    sup { font-size: 0.75em; }
+    footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; padding-block: 1.5rem 2rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.8rem; }
+    footer p { margin: 0; }
+
+    @media (max-width: 600px) {
+      .page { padding-inline: 1.25rem; }
+      .profile { padding-top: 2.5rem; }
+      .profile-heading { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+      .profile-photo { width: 144px; height: 160px; }
+      .position { font-size: 1.05rem; }
+      section { padding-top: 2rem; }
+      h2 { font-size: 1.6rem; }
+      .publications { padding-left: 1.3rem; }
+      .publications > li { padding-left: 0.2rem; }
+    }
+
+    @media print {
+      @page { margin: 0.65in; }
+      body { border: 0; background: white; color: black; font-size: 10pt; line-height: 1.45; }
+      .page { max-width: none; padding: 0; }
+      .profile { padding-top: 0; }
+      .profile-heading { grid-template-columns: 90px minmax(0, 1fr); gap: 1rem; }
+      .profile-media { width: 90px; }
+      .profile-photo { width: 90px; height: 100px; }
+      h1 { font-size: 28pt; }
+      h2 { font-size: 16pt; break-after: avoid; }
+      h3 { break-after: avoid; }
+      .profile-links .cv-download, .skip-link, .back-to-top { display: none; }
+      .position { font-size: 11pt; }
+      .profile-links { gap: 0; }
+      .profile-links a { min-width: 0; min-height: 0; }
+      a { color: inherit; text-decoration: none; }
+      section { margin-top: 1.2rem; padding-top: 1.2rem; }
+      .publications > li { margin-bottom: 1rem; break-inside: avoid; }
+      .publication-title { font-size: 10pt; }
+      .authors, .venue, .section-note { font-size: 9pt; }
+      footer { margin-top: 1.5rem; padding-bottom: 0; }
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Daniel Levine</h1>
-        <hr>
-        <div class="contact-info">
-            Email: daniel.levine@yale.edu
-            <a href="">CV</a>
-            <a href="https://www.linkedin.com/in/danielflevine">LinkedIn</a>
-            <a href="https://scholar.google.com/citations?user=2G-O1zQAAAAJ">Google Scholar</a>
-            <a href="https://github.com/DanielFLevine">GitHub</a>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header class="profile">
+      <div class="profile-heading">
+        <div class="profile-media">
+          <img class="profile-photo" src="headshot_linkedin.jpeg" alt="Headshot of Daniel Levine" width="180" height="200">
+          <div class="profile-links" aria-label="Contact and academic profiles">
+            <a href="mailto:daniel.levine@yale.edu" aria-label="Email Daniel Levine at daniel.levine@yale.edu" title="Email: daniel.levine@yale.edu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m3 6 9 7 9-7"></path>
+              </svg>
+            </a>
+            <a class="cv-download" href="dl_cv.pdf" download aria-label="Download CV (PDF)" title="Download CV (PDF)">CV</a>
+            <a href="https://scholar.google.com/citations?user=2G-O1zQAAAAJ" aria-label="Google Scholar" title="Google Scholar">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5 12 0z"></path>
+              </svg>
+            </a>
+            <a href="https://github.com/DanielFLevine" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M12 .297C5.37.297 0 5.67 0 12.297c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.043-1.61-4.043-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.838 1.237 1.838 1.237 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.467-1.334-5.467-5.93 0-1.31.469-2.38 1.236-3.22-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.652.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.609-2.807 5.625-5.48 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/danielflevine" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+              </svg>
+            </a>
+          </div>
         </div>
-        <p>
-            I am currently a postdoctoral associate at the <a href="https://www.vandijklab.org/">van Dijk Lab</a> at Yale University.
-            I completed my PhD in math in 2020 under the supervision of Jack Huizenga with a dissertation on moduli spaces of semistable sheaves.
-            My current research interests are broad but include 
-            large language models and their applications to biomedical data, 
-            applications of topology to machine learning, and relational inference.
-        </p>
-        <h2>Publications</h2>
-    </div>
+        <div class="profile-copy">
+          <p class="eyebrow">Personal webpage</p>
+          <h2>Daniel Levine</h2>
+          <p class="position">Yale–Boehringer Ingelheim Biomedical Data Science Postdoctoral Fellow</p>
+          <p class="affiliation">van Dijk Lab · Department of Internal Medicine · Yale School of Medicine</p>
+          <p class="intro">
+            I am a postdoctoral fellow in the <a href="https://www.vandijklab.org/">van Dijk Lab</a> at Yale University, mentored by David van Dijk.
+            My research interests include continual learning, 0-shot generalization, biologically grounded learning,
+            biomedical foundation models, and AI agents.
+          </p>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <!-- Edit the publication entries below. Replace dl_cv.pdf to update the downloadable CV. -->
+      <section id="publications" aria-labelledby="publications-heading">
+        <h2 id="publications-heading">Publications &amp; preprints</h2>
+        <p class="section-note">* Co-first author</p>
+        <ol class="publications">
+          <li>
+            <h3 class="publication-title"><a href="https://arxiv.org/abs/2610.40757v1">Self-Modifying Neural Networks that Zero-Shot Infer and Continually Learn</a></h3>
+            <p class="authors"><strong>D. Levine</strong>, D. van Dijk, K. Kay</p>
+            <p class="venue"><em>arXiv</em> · 2026</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://www.biorxiv.org/content/10.1101/2025.04.14.648850v4">Scaling Large Language Models for Next-Generation Single-Cell Analysis</a></h3>
+            <p class="authors">S.A. Rizvi, <strong>D. Levine<sup>*</sup></strong>, A. Patel, S. Zhang, E. Wang, C. Perry, I. Vrkic, N.M. Constante, Z. Fu, S. He, D. Zhang, C. Tang, Z. Lyu, R. Darji, C. Li, E. Sun, D. Jeong, L. Zhao, J. Kwan, D. Braun, B. Hafler, H. Chung, R.M. Dhodapkar, P. Jaeger, J. Ishizuka, S. Azizi, D. van Dijk</p>
+            <p class="venue"><em>bioRxiv</em> · 2026</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://www.biorxiv.org/content/10.64898/2025.12.09.693245v1">Perturbational single-cell profiling of patient tumors defines lineage- and context-specific programs of innate immune resistance</a></h3>
+            <p class="authors">C. Perry, A. Frey, Y. Fei, J. Wang, P. Costa, H.N. Amin, S. Ghadermarzi, <strong>D. Levine</strong>, W. Tong, A. Koda, M. Mackie, M. He, Y. Nie, K. Clulo, F. Ouerghi, J. Wei, T. Cordero Dumit, M. Yaskolko, M. Ding, A. Caldera, O. Kyrysyuk, L. Lum, J.W. Allen, W. Guo, A. Naqash, A. Elliot, A. Vanderwalde, M. Capelletti, T. Adeyelu, S.T. Barry, M. Hugaboom, A. Bacchiocchi, H. Kluger, M. Bosenberg, A. Iwasaki, D. Braun, J. Clune, D. van Dijk, K. Olino, J.J. Ishizuka</p>
+            <p class="venue"><em>bioRxiv</em> · 2025</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/115857">Non-Markovian Discrete Diffusion with Causal Language Models</a></h3>
+            <p class="authors">Y. Zhang, S. He, <strong>D. Levine</strong>, L. Zhao, D. Zhang, S.A. Rizvi, E. Zappala, R. Ying, D. van Dijk</p>
+            <p class="venue"><em>NeurIPS</em> · 2025</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://arxiv.org/abs/2410.05292">CaLMFlow: Volterra Flow Matching using Causal Language Models</a></h3>
+            <p class="authors">S. He, <strong>D. Levine<sup>*</sup></strong>, I. Vrkic, M. Bressana, D. Zhang, S. Rizvi, Y. Zhang, E. Zappala, D. van Dijk</p>
+            <p class="venue"><em>arXiv</em> · 2024</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://icml.cc/virtual/2024/poster/34580">Cell2sentence: Teaching large language models the language of biology</a></h3>
+            <p class="authors"><strong>D. Levine</strong>, S.A. Rizvi, S. Lévy, N. Pallikkavaliyaveetil, D. Zhang, X. Chen, S. Ghadermarzi, R. Wu, Z. Zheng, I. Vrkic, A. Zhong, D. Raskin, I. Han, A.H.O. Fonseca, J.O. Caro, A. Karbasi, R.M. Dhodapkar, D. van Dijk</p>
+            <p class="venue"><em>ICML</em> · 2024</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://www.biorxiv.org/content/10.1101/2023.09.12.557460v2">BrainLM: A foundation model for brain activity recordings</a></h3>
+            <p class="authors">J.O. Caro, A.H.O. Fonseca, C. Averill, S.A. Rizvi, M. Rosati, J.L. Cross, P. Mittal, E. Zappala, <strong>D. Levine<sup>†</sup></strong>, R.M. Dhodapkar, I. Han, A. Karbasi, C.G. Abdallah, D. van Dijk</p>
+            <p class="venue"><em>ICLR</em> · 2024 · † On preprint</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://arxiv.org/abs/2310.01618">Operator Learning Meets Numerical Analysis: Improving Neural Networks through Iterative Methods</a></h3>
+            <p class="authors">E. Zappala, <strong>D. Levine</strong>, S. He, S. Rizvi, S. Lévy, D. van Dijk</p>
+            <p class="venue"><em>arXiv</em> · 2023</p>
+          </li>
+          <li>
+            <h3 class="publication-title"><a href="https://aif.centre-mersenne.org/articles/10.5802/aif.3619/">Brill-Noether and existence of semistable sheaves on del Pezzo surfaces</a></h3>
+            <p class="authors"><strong>D. Levine</strong>, S. Zhang</p>
+            <p class="venue"><em>Annales de l’Institut Fourier</em> · 2022</p>
+          </li>
+        </ol>
+      </section>
+    </main>
+    <footer>
+      <p>Daniel Levine's Personal Webpage</p>
+      <a class="back-to-top" href="#top">Back to top ↑</a>
+    </footer>
+  </div>
 </body>
 </html>
